@@ -34,15 +34,7 @@ fun TimerTab(modifier: Modifier = Modifier) {
             color = Color.Gray
         )
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
 
-            contentAlignment = Alignment.Center
-        ) {
-
-        }
 
     }
 
