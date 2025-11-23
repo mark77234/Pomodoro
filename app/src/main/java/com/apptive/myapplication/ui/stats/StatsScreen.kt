@@ -4,8 +4,11 @@ import android.R.color.white
 import android.view.RoundedCorner
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,9 +59,120 @@ fun StatsTab(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "습관 달성 현황",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
+                Spacer(modifier = Modifier.height(70.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 0.3.dp,
+                            color = Color.Gray.copy(alpha = 0.5f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(15.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "공부 30분",
+                            fontSize = 17.sp,
+                        )
+                        Text(
+                            text = "미완료",
+                            fontSize = 13.sp,
+                            color = Color.DarkGray,
+                            modifier = Modifier
+                                .background(
+                                    color = Color(0xFFF3F4F6),
+                                    shape = RoundedCornerShape(50.dp)
+                                )
+                                .padding(
+                                    horizontal = 10.dp,
+                                    vertical = 4.dp
+                                )
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(13.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 0.3.dp,
+                            color = Color.Gray.copy(alpha = 0.5f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(15.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "노트 정리",
+                            fontSize = 17.sp,
+                        )
+                        Text(
+                            text = "미완료",
+                            fontSize = 13.sp,
+                            color = Color.DarkGray,
+                            modifier = Modifier
+                                .background(
+                                    color = Color(0xFFF3F4F6),
+                                    shape = RoundedCornerShape(50.dp)
+                                )
+                                .padding(
+                                    horizontal = 10.dp,
+                                    vertical = 4.dp
+                                )
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(13.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 0.3.dp,
+                            color = Color.Gray.copy(alpha = 0.5f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(15.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "문제 풀기",
+                            fontSize = 17.sp,
+                        )
+                        Text(
+                            text = "미완료",
+                            fontSize = 13.sp,
+                            color = Color.DarkGray,
+                            modifier = Modifier
+                                .background(
+                                    color = Color(0xFFF3F4F6),
+                                    shape = RoundedCornerShape(50.dp)
+                                )
+                                .padding(
+                                    horizontal = 10.dp,
+                                    vertical = 4.dp
+                                )
+                        )
+                    }
+                }
             }
         }
     }
