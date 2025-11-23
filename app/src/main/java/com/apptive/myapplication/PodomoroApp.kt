@@ -1,8 +1,10 @@
 package com.apptive.myapplication
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -48,47 +50,54 @@ fun PodomoroApp() {
 
     Scaffold(
         bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,   // 원하는 색
-                tonalElevation = 0.dp
-            ) {
-                bottomNavItems.forEach { item ->
-                    val selected = currentDestination
-                        ?.hierarchy
-                        ?.any { destination -> destination.route == item.destination.route } == true
+            Column {
+                // ⭐ 네비바 상단 구분선 추가
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = Color(0xFFE0E0E0)
+                )
+                NavigationBar(
+                    containerColor = Color.White,   // 원하는 색
+                    tonalElevation = 0.dp
+                ) {
+                    bottomNavItems.forEach { item ->
+                        val selected = currentDestination
+                            ?.hierarchy
+                            ?.any { destination -> destination.route == item.destination.route } == true
 
-                    NavigationBarItem(
-                        selected = selected,
-                        onClick = {
-                            if (!selected) {
-                                navController.navigate(item.destination.route) {
-                                    popUpTo(navController.graph.startDestinationId) {
-                                        saveState = true
+                        NavigationBarItem(
+                            selected = selected,
+                            onClick = {
+                                if (!selected) {
+                                    navController.navigate(item.destination.route) {
+                                        popUpTo(navController.graph.startDestinationId) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
                                     }
-                                    launchSingleTop = true
-                                    restoreState = true
                                 }
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = item.icon),
-                                contentDescription = item.destination.title,
-                                modifier = Modifier.size(30.dp)
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = item.icon),
+                                    contentDescription = item.destination.title,
+                                    modifier = Modifier.size(30.dp)
 
+                                )
+                            },
+                            label = { Text(item.destination.title) },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color(0xFFE57373),
+                                selectedTextColor = Color(0xFFE57373),
+
+                                unselectedIconColor = Color(0xFFC0C0C0),
+                                unselectedTextColor = Color(0xFFC0C0C0),
+
+                                indicatorColor = Color.Transparent  // 선택 시 배경색 없앰
                             )
-                        },
-                        label = { Text(item.destination.title) },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color(0xFFE57373),
-                            selectedTextColor = Color(0xFFE57373),
-
-                            unselectedIconColor = Color(0xFFC0C0C0),
-                            unselectedTextColor = Color(0xFFC0C0C0),
-
-                            indicatorColor = Color.Transparent  // 선택 시 배경색 없앰
                         )
-                    )
+                    }
                 }
             }
         }
