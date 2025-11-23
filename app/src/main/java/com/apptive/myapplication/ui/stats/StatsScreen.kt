@@ -35,17 +35,7 @@ enum class HabitStatus(val displayText: String, val bgColor: Color, val textColo
 
 @Composable
 fun StatsTab(modifier: Modifier = Modifier) {
-    var currentStatus1 by remember {
-        mutableStateOf(HabitStatus.NOT_COMPLETED)
-    }
-    var currentStatus2 by remember {
-        mutableStateOf(HabitStatus.NOT_COMPLETED)
-    }
-    var currentStatus3 by remember {
-        mutableStateOf(HabitStatus.NOT_COMPLETED)
-    }
-
-    Column(
+        Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -79,138 +69,63 @@ fun StatsTab(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(70.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 0.3.dp,
-                            color = Color.Gray.copy(alpha = 0.5f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(15.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "공부 30분",
-                            fontSize = 17.sp,
-                        )
-                        Text(
-                            text = currentStatus1.displayText,
-                            fontSize = 13.sp,
-                            color = currentStatus1.textColor,
-                            modifier = Modifier
-                                .background(
-                                    color = currentStatus1.bgColor,
-                                    shape = RoundedCornerShape(50.dp)
-                                )
-                                .clickable{
-                                    currentStatus1 = when (currentStatus1) {
-                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
-                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
-                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
-                                    }
-                                }
-                                .padding(
-                                    horizontal = 10.dp,
-                                    vertical = 4.dp
-                                )
-                        )
-                    }
-                }
+                HabitItem("공부 30분")
                 Spacer(modifier = Modifier.height(13.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 0.3.dp,
-                            color = Color.Gray.copy(alpha = 0.5f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(15.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "노트 정리",
-                            fontSize = 17.sp,
-                        )
-                        Text(
-                            text = currentStatus2.displayText,
-                            fontSize = 13.sp,
-                            color = currentStatus2.textColor,
-                            modifier = Modifier
-                                .background(
-                                    color = currentStatus2.bgColor,
-                                    shape = RoundedCornerShape(50.dp)
-                                )
-                                .clickable{
-                                    currentStatus2 = when (currentStatus2) {
-                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
-                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
-                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
-                                    }
-                                }
-                                .padding(
-                                    horizontal = 10.dp,
-                                    vertical = 4.dp
-                                )
-                        )
-                    }
-                }
+                HabitItem("노트 정리")
                 Spacer(modifier = Modifier.height(13.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 0.3.dp,
-                            color = Color.Gray.copy(alpha = 0.5f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(15.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "문제 풀기",
-                            fontSize = 17.sp,
-                        )
-                        Text(
-                            text = currentStatus3.displayText,
-                            fontSize = 13.sp,
-                            color = currentStatus3.textColor,
-                            modifier = Modifier
-                                .background(
-                                    color = currentStatus3.bgColor,
-                                    shape = RoundedCornerShape(50.dp)
-                                )
-                                .clickable{
-                                    currentStatus3 = when (currentStatus3) {
-                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
-                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
-                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
-                                    }
-                                }
-                                .padding(
-                                    horizontal = 10.dp,
-                                    vertical = 4.dp
-                                )
-                        )
-                    }
-                }
+                HabitItem("문제 풀기")
             }
+        }
+    }
+}
+
+@Composable
+fun HabitItem(habitName: String) {
+    var currentStatus by remember {
+        mutableStateOf(HabitStatus.NOT_COMPLETED)
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(
+                width = 0.3.dp,
+                color = Color.Gray.copy(alpha = 0.5f),
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(15.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = habitName,
+                fontSize = 17.sp,
+            )
+            Text(
+                text = currentStatus.displayText,
+                fontSize = 13.sp,
+                color = currentStatus.textColor,
+                modifier = Modifier
+                    .background(
+                        color = currentStatus.bgColor,
+                        shape = RoundedCornerShape(50.dp)
+                    )
+                    .clickable{
+                        currentStatus = when (currentStatus) {
+                            HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
+                            HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
+                            HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
+                        }
+                    }
+                    .padding(
+                        horizontal = 10.dp,
+                        vertical = 4.dp
+                    )
+            )
         }
     }
 }
