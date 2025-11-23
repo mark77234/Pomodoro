@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -38,7 +37,7 @@ fun PodomoroApp() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val appBarTitle = bottomNavItems
+    bottomNavItems
         .firstOrNull { item ->
             currentDestination?.hierarchy?.any { it.route == item.destination.route } == true
         }
@@ -47,11 +46,6 @@ fun PodomoroApp() {
         ?: PodomoroDestination.Home.title
 
     Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = appBarTitle) }
-            )
-        },
         bottomBar = {
             NavigationBar {
                 bottomNavItems.forEach { item ->
