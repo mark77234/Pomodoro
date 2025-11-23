@@ -1,6 +1,7 @@
 package com.apptive.myapplication.ui.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -46,6 +47,7 @@ fun HomeTab(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(color = Color.White)
             .padding(16.dp)
     ) {
         Text(
@@ -68,6 +70,7 @@ fun HomeTab(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.White, shape = RoundedCornerShape(16.dp)) //모서리가 둥글게 하기 위함
+                .border(width = 1.dp, color = Color.LightGray, shape = RoundedCornerShape(12.dp))
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
