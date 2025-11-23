@@ -20,12 +20,6 @@ import androidx.compose.ui.unit.sp
 import com.apptive.myapplication.ui.stats.components.HabitItem
 import com.apptive.myapplication.ui.theme.backgroundColor
 
-enum class HabitStatus(val displayText: String, val bgColor: Color, val textColor: Color) {
-    NOT_COMPLETED("미완료", Color(0xFFEEEEEE), Color.DarkGray),
-    IN_PROGRESS("진행중", Color(0xFF87CEFA), Color(0xFFE0F7FA)),
-    COMPLETED("완료", Color(0xFFF87171), Color(0xFFE8F5E9));
-}
-
 @Composable
 fun StatsTab(modifier: Modifier = Modifier) {
     Column(
