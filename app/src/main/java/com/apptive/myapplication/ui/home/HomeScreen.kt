@@ -31,11 +31,8 @@ import com.apptive.myapplication.ui.home.components.HabitList
 //data class를 model/Habit로 이동함
 import com.apptive.myapplication.model.Habit
 
-
-// 습관의 내용과 완료 상태를 저장할 데이터 클래스 정의
 @Composable
 fun HomeTab(modifier: Modifier = Modifier) {
-
     // 날짜를 현재 시간 기준으로 표현하기 위한 변수들
     val currentDate = LocalDate.now()
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")

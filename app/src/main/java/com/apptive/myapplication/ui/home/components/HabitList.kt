@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apptive.myapplication.ui.home.Habit
+import com.apptive.myapplication.model.Habit
 
 @Composable
 fun HabitList(
