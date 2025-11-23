@@ -35,10 +35,10 @@ enum class HabitStatus(val displayText: String, val bgColor: Color, val textColo
 
 @Composable
 fun StatsTab(modifier: Modifier = Modifier) {
-        Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
+    Column(
+    modifier = modifier
+        .fillMaxSize()
+        .padding(16.dp),
     ) {
         Text(
             text = "학습 통계",
