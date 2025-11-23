@@ -38,6 +38,7 @@ fun StatsTab(modifier: Modifier = Modifier) {
     Column(
     modifier = modifier
         .fillMaxSize()
+        .background(Color.White)
         .padding(16.dp),
     ) {
         Text(
@@ -58,7 +59,12 @@ fun StatsTab(modifier: Modifier = Modifier) {
                 .padding(5.dp)
                 .background(
                     color = backgroundColor,
-                    shape = RoundedCornerShape(16.dp)),
+                    shape = RoundedCornerShape(16.dp))
+                .border(
+                    width = 0.3.dp,
+                    color = Color.Gray.copy(alpha = 0.5f),
+                    shape = RoundedCornerShape(8.dp)
+                )
         ){
             Column(
                 modifier = Modifier.padding(18.dp)
