@@ -2,6 +2,7 @@ package com.apptive.myapplication.ui.timer
 
 import android.R.attr.elevation
 import android.R.attr.shape
+import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.snapping.SnapPosition
@@ -20,10 +21,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +43,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TimerTab(modifier: Modifier = Modifier) {
+
+    var is50min by remember { mutableStateOf(true) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -122,46 +131,48 @@ fun TimerTab(modifier: Modifier = Modifier) {
 
                     ) {
                     Button(
-                        onClick = { /* 50/10 모드 선택 로직 */ },
+                        onClick = { is50min = true },
                         modifier = Modifier
                             .weight(1f)
                             .height(50.dp),
                         shape = RoundedCornerShape(12.dp),
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFDC2626)
+                            containerColor = if (is50min) Color(0xFFDC2626)  else Color(0xFFE5E7EB)
                         ),
                     )
                     {
                         Text(
                             text = "50/10",
-                            color = Color.White,
+                            color = if (is50min) Color.White else Color.Black,
 
                             )
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Button(
-                        onClick = { /* 30/5 모드 선택 로직 */ },
+                        onClick = { is50min = false },
                         modifier = Modifier
                             .weight(1f)
                             .height(50.dp),
                         shape = RoundedCornerShape(12.dp),
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFF3F4F6)
+                            containerColor = if (!is50min) Color(0xFFDC2626) else Color(0xFFE5E7EB)
                         ),
 
                         ) {
                         Text(
                             text = "30/5",
-                            color = Color.Black,
+                            color = if (!is50min) Color.White else Color.Black,
 
                             )
                     }
 
                 }
                 Spacer(modifier = Modifier.padding(5.dp))
-                Text(text = "50분 공부, 10분 휴식",
+                Text(
+                    text = if (is50min) "50분 공부, 10분 휴식" else "30분 공부, 5분 휴식",
+
                     modifier = Modifier.fillMaxWidth(),
                     fontSize = 14.sp,
                     color = Color(0xFF6B7280),
@@ -174,7 +185,7 @@ fun TimerTab(modifier: Modifier = Modifier) {
 
 
 
-
+// 스크롤 , 폰마다 크기 변화
         }
 
 
