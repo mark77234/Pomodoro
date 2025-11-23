@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -36,6 +37,7 @@ fun HabitList(
                 color = Color.LightGray,
                 shape = RoundedCornerShape(8.dp)
             )
+            .size(55.dp)
             .padding(horizontal = 12.dp, vertical = 8.dp), // 테두리 안 여백 정의 : 좌우 12.dp, 위아래: 8.dp
         verticalAlignment = Alignment.CenterVertically // contents를 수직 방향으로 가운데 정렬
     ) {
