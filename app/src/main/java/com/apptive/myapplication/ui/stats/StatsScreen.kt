@@ -1,10 +1,12 @@
 package com.apptive.myapplication.ui.stats
 
 import android.R.color.white
+import android.view.Display
 import android.view.RoundedCorner
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +19,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,11 +30,27 @@ import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.apptive.myapplication.model.Habit
 import com.apptive.myapplication.ui.theme.backgroundColor
 
+enum class HabitStatus(val displayText: String, val bgColor: Color, val textColor: Color) {
+    NOT_COMPLETED("미완료", Color(0xFFEEEEEE), Color.DarkGray),
+    IN_PROGRESS("진행중", Color(0xFF87CEFA), Color(0xFFE0F7FA)),
+    COMPLETED("완료", Color(0xFFF87171), Color(0xFFE8F5E9));
+}
 
 @Composable
 fun StatsTab(modifier: Modifier = Modifier) {
+    var currentStatus1 by remember {
+        mutableStateOf(HabitStatus.NOT_COMPLETED)
+    }
+    var currentStatus2 by remember {
+        mutableStateOf(HabitStatus.NOT_COMPLETED)
+    }
+    var currentStatus3 by remember {
+        mutableStateOf(HabitStatus.NOT_COMPLETED)
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -84,14 +106,21 @@ fun StatsTab(modifier: Modifier = Modifier) {
                             fontSize = 17.sp,
                         )
                         Text(
-                            text = "미완료",
+                            text = currentStatus1.displayText,
                             fontSize = 13.sp,
-                            color = Color.DarkGray,
+                            color = currentStatus1.textColor,
                             modifier = Modifier
                                 .background(
-                                    color = Color(0xFFF3F4F6),
+                                    color = currentStatus1.bgColor,
                                     shape = RoundedCornerShape(50.dp)
                                 )
+                                .clickable{
+                                    currentStatus1 = when (currentStatus1) {
+                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
+                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
+                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
+                                    }
+                                }
                                 .padding(
                                     horizontal = 10.dp,
                                     vertical = 4.dp
@@ -121,14 +150,21 @@ fun StatsTab(modifier: Modifier = Modifier) {
                             fontSize = 17.sp,
                         )
                         Text(
-                            text = "미완료",
+                            text = currentStatus2.displayText,
                             fontSize = 13.sp,
-                            color = Color.DarkGray,
+                            color = currentStatus2.textColor,
                             modifier = Modifier
                                 .background(
-                                    color = Color(0xFFF3F4F6),
+                                    color = currentStatus2.bgColor,
                                     shape = RoundedCornerShape(50.dp)
                                 )
+                                .clickable{
+                                    currentStatus2 = when (currentStatus2) {
+                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
+                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
+                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
+                                    }
+                                }
                                 .padding(
                                     horizontal = 10.dp,
                                     vertical = 4.dp
@@ -158,14 +194,21 @@ fun StatsTab(modifier: Modifier = Modifier) {
                             fontSize = 17.sp,
                         )
                         Text(
-                            text = "미완료",
+                            text = currentStatus3.displayText,
                             fontSize = 13.sp,
-                            color = Color.DarkGray,
+                            color = currentStatus3.textColor,
                             modifier = Modifier
                                 .background(
-                                    color = Color(0xFFF3F4F6),
+                                    color = currentStatus3.bgColor,
                                     shape = RoundedCornerShape(50.dp)
                                 )
+                                .clickable{
+                                    currentStatus3 = when (currentStatus3) {
+                                        HabitStatus.NOT_COMPLETED -> HabitStatus.IN_PROGRESS
+                                        HabitStatus.IN_PROGRESS -> HabitStatus.COMPLETED
+                                        HabitStatus.COMPLETED -> HabitStatus.NOT_COMPLETED
+                                    }
+                                }
                                 .padding(
                                     horizontal = 10.dp,
                                     vertical = 4.dp
