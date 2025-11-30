@@ -34,7 +34,7 @@ fun AddHabitButton(onClick: () -> Unit) { // +새로운 습관 추가 버튼 ui 
             // 함수 parameter : onClick -> 외부에서 showDialog = true 를 전달받았을 때 실행되도록 함
             .drawBehind {// 표준 border Modifier가 점선을 지원하지 않음 -> var stroke 정의하여 스타일 적용시킴
                 drawRoundRect(
-                    color = Color.LightGray,
+                    color = Color.Gray,
                     style = stroke,
                     cornerRadius = CornerRadius(8.dp.toPx()) // 모서리 둥글게
                 )

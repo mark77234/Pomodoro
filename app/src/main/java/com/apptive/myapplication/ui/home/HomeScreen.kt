@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -69,8 +70,10 @@ fun HomeTab(modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = Color.White, shape = RoundedCornerShape(16.dp)) //모서리가 둥글게 하기 위함
-                .border(width = 1.dp, color = Color.LightGray, shape = RoundedCornerShape(12.dp))
+                .shadow(elevation = 3.dp, shape = RoundedCornerShape(16.dp))
+                // 테두리색 지정보다는 다른 페이지와의 통일감을 위해 그림자로 변경
+                .background(color = Color.White, shape = RoundedCornerShape(16.dp))
+                //RoundedCornerShape: 모서리가 둥글게 하기 위함. size 숫자 클수록 더 둥글둥글해짐
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -81,7 +84,7 @@ fun HomeTab(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(bottom = 4.dp)
             )
 
-            //상태 리스트를 기반으로 HabitList를 동적으로 생성하고, 클릭 이벤트 처리
+            // 상태 리스트를 기반으로 HabitList를 동적으로 생성하고, 클릭 이벤트 처리
             // '동적' 이란 말의 의미: 고정되지 않음
             habits.forEachIndexed { index, habit ->
                 HabitList(

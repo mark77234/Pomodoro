@@ -1,5 +1,6 @@
 package com.apptive.myapplication.ui.home.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -32,6 +34,8 @@ fun HabitList(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            // 클릭했을 때 배경색이 사각형이 아닌 둥근 모서리로 채워지려면 클릭 효과가 적용될 영역을 먼저 둥글게 잘라내야 함(clip)
             .clickable(onClick = onHabitClick) // Row 전체에 클릭 이벤트 적용
             .border(
                 width = 1.dp, //테두리 두께
@@ -53,14 +57,17 @@ fun HabitList(
 
         Spacer(modifier = Modifier.width(12.dp)) //아이콘과 텍스트 사이에 12.dp만큼의 가로 간격
 
-        //isDone 상태에 따라 텍스트 색상과 취소선을 변경
-        val textColor = if (habit.isDone) Color.Gray else Color.Black
-        val textDecoration = if (habit.isDone) TextDecoration.LineThrough else TextDecoration.None
+        //isDone 상태에 따라 텍스트 색상과 배경색을 변경
+
+        val textBackground = if (habit.isDone) Color(0x20B31B1B) else Color.Transparent
+        // default : 색 채우기 투명 -> isDone: 색 채우기 핑크
         Text(
             text = habit.text,
+            modifier = Modifier.background(textBackground, shape = RoundedCornerShape(6.dp)),
+            // isDone 상태에 따라 색 채우기 변경
             fontSize = 12.sp,
-            color = textColor,
-            textDecoration = textDecoration
+            color = if (habit.isDone) Color.Gray else Color.Black
+            // default : 글자색 검은색 -> isDone: 글자색 검정
         )
     }
 }
