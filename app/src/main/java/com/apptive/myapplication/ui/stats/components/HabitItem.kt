@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apptive.myapplication.ui.stats.HabitStatus
+import com.apptive.myapplication.model.HabitStatus
 
 @Composable
 fun HabitItem(habitName: String) {
