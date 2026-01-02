@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+// 타이머 모드 버튼 50/10 또는 30/5 선택시 버튼 변화, 타이머 초기화 컴포넌트
 @Composable
 fun ModeSelector(
     is50minMode: Boolean,
@@ -30,7 +30,6 @@ fun ModeSelector(
     Text(text = "타이머 모드", fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
     Spacer(modifier = Modifier.height(12.dp))
 
-    // Row 내부의 버튼들에 Modifier.weight(1f)를 전달합니다.
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -38,13 +37,13 @@ fun ModeSelector(
         ModeButton(
             text = "50/10",
             isSelected = is50minMode,
-            modifier = Modifier.weight(1f) // 반반씩 나눠 갖도록 설정
+            modifier = Modifier.weight(1f)
         ) { onModeChange(true) }
 
         ModeButton(
             text = "30/5",
             isSelected = !is50minMode,
-            modifier = Modifier.weight(1f) // 반반씩 나눠 갖도록 설정
+            modifier = Modifier.weight(1f)
         ) { onModeChange(false) }
     }
 
@@ -63,12 +62,11 @@ fun ModeSelector(
 fun ModeButton(
     text: String,
     isSelected: Boolean,
-    modifier: Modifier = Modifier, // Modifier를 파라미터로 받도록 수정
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
-        // fillMaxWidth()를 제거하고 외부에서 받아온 modifier(weight)를 적용합니다.
         modifier = modifier.height(50.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(

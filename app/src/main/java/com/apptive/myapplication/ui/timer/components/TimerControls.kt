@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+// 타이머 및 시작, 초기화 버튼 컴포넌트
 @Composable
 fun TimerControls(
     isStarted: Boolean,

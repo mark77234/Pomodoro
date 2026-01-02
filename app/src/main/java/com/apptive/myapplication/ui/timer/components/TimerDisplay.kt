@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+// 타이머 시간 디스플레이 컴포넌트
 @Composable
 fun TimerDisplay(
     isWorking: Boolean,
@@ -39,16 +39,13 @@ fun TimerDisplay(
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                // TimerDisplay.kt의 Text 부분 수정
-
-                    text = if (isWorking) "집중 시간" else "휴식 시간",
-                    // 집중은 빨간색, 휴식은 초록색으로 확실히 구분!
-                    color = if (isWorking) Color(0xFFDC2626) else Color(0xFF10B981),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                text = if (isWorking) "집중 시간" else "휴식 시간",
+                color = if (isWorking) Color(0xFFDC2626) else Color(0xFF10B981),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
             )
 
-                        Text(
+            Text(
                 text = timeLeft,
                 fontSize = 64.sp,
                 fontWeight = FontWeight.Bold,

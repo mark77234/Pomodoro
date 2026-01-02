@@ -27,15 +27,15 @@ fun TimerTab() {
 
     var is50minMode by remember { mutableStateOf(true) }
     var isStarted by remember { mutableStateOf(false) }
-    var isWorking by remember { mutableStateOf(true) } // 공부중/휴식중
-    var timeLeft by remember { mutableStateOf(50 * 60) } // 초 단위
+    var isWorking by remember { mutableStateOf(true) }
+    var timeLeft by remember { mutableStateOf(50 * 60) }
 
     LaunchedEffect(key1 = isStarted, key2 = timeLeft) {
         if (isStarted && timeLeft > 0) {
             delay(1000L)
             timeLeft--
         } else if (isStarted && timeLeft == 0) {
-            // 시간이 다 되면 자동으로 모드 전환! (50->10 또는 30->5)
+            // 시간이 다 되면 자동으로 모드 전환 (50->10 또는 30->5)
             if (isWorking) {
                 isWorking = false
                 timeLeft = if (is50minMode) 10 * 60 else 5 * 60
@@ -67,7 +67,7 @@ fun TimerTab() {
         Spacer(modifier = Modifier.height(20.dp))
 
         // --- 상단 타이머 박스 ---
-        Column( // 전체를 감싸는 Column 추가
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -76,47 +76,45 @@ fun TimerTab() {
                 .padding(vertical = 30.dp, horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-                // 시간 게이지 계산
-                val totalTime = if (is50minMode) {
-                    if (isWorking) 50 * 60f else 10 * 60f
-                } else {
-                    if (isWorking) 30 * 60f else 5 * 60f
-                }
-                val progress = (totalTime - timeLeft) / totalTime
-                TimerDisplay(
-                    isWorking = isWorking,
-                    timeLeft = formatTime(timeLeft),
-                    progress = progress
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-
-                TimerControls(
-                    isStarted = isStarted,
-                    onToggleTimer = {
-                        if (!isStarted && timeLeft > 0) {
-                            timeLeft--
-                        }
-                        isStarted = !isStarted
-                                    },
-                    onReset = { isStarted = false; isWorking = true; timeLeft = if (is50minMode) 50 * 60 else 30 * 60 }
-                )
-
-                }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            ModeSelector(is50minMode) { selected50 ->
-                is50minMode = selected50
-                isWorking = true
-                isStarted = false
-                timeLeft = if (selected50) 50 * 60 else 30 * 60
+            // 시간 게이지 계산
+            val totalTime = if (is50minMode) {
+                if (isWorking) 50 * 60f else 10 * 60f
+            } else {
+                if (isWorking) 30 * 60f else 5 * 60f
             }
-    }
-// 스크롤 시 하단 여백 확보
-    Spacer(modifier = Modifier.height(40.dp))
+            val progress = (totalTime - timeLeft) / totalTime
+            TimerDisplay(
+                isWorking = isWorking,
+                timeLeft = formatTime(timeLeft),
+                progress = progress
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+
+            TimerControls(
+                isStarted = isStarted,
+                onToggleTimer = {
+                    // 시작 버튼 누르자마자 1초 감소 후 시간 게이지 감소
+                    if (!isStarted && timeLeft > 0) {
+                        timeLeft--
+                    }
+                    isStarted = !isStarted
+                                    },
+                onReset = { isStarted = false; isWorking = true; timeLeft = if (is50minMode) 50 * 60 else 30 * 60 }
+            )
 
         }
 
+        // 히딘 타이머 모드 박스
+        Spacer(modifier = Modifier.height(20.dp))
 
+        ModeSelector(is50minMode) { selected50 ->
+            is50minMode = selected50
+            isWorking = true
+            isStarted = false
+            timeLeft = if (selected50) 50 * 60 else 30 * 60
+        }
+    }
+    // 스크롤 시 하단 여백 확보
+    Spacer(modifier = Modifier.height(40.dp))
 
-
+}
