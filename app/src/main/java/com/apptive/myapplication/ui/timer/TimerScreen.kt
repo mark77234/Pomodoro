@@ -83,9 +83,11 @@ fun TimerTab() {
                     if (isWorking) 30 * 60f else 5 * 60f
                 }
                 val progress = (totalTime - timeLeft) / totalTime
-                TimerDisplay(isWorking
-                    , formatTime(timeLeft)
-                    ,(totalTime - timeLeft) / totalTime)
+                TimerDisplay(
+                    isWorking = isWorking,
+                    timeLeft = formatTime(timeLeft),
+                    progress = progress
+                )
                 Spacer(modifier = Modifier.height(24.dp))
 
                 TimerControls(
