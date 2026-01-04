@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.apptive.myapplication.ui.home.HomeTab
 import com.apptive.myapplication.ui.stats.StatsTab
 import com.apptive.myapplication.ui.timer.TimerTab
+import com.apptive.myapplication.viewmodel.MainViewModel
 
 enum class PodomoroDestination(val route: String, val title: String) {
     Home("home", "홈"),
@@ -18,6 +19,7 @@ enum class PodomoroDestination(val route: String, val title: String) {
 @Composable
 fun PodomoroNavGraph(
     navController: NavHostController,
+    mainViewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -26,13 +28,13 @@ fun PodomoroNavGraph(
         modifier = modifier
     ) {
         composable(route = PodomoroDestination.Home.route) {
-            HomeTab()
+            HomeTab(viewModel = mainViewModel)
         }
         composable(route = PodomoroDestination.Timer.route) {
             TimerTab()
         }
         composable(route = PodomoroDestination.Stats.route) {
-            StatsTab()
+            StatsTab(viewModel = mainViewModel)
         }
     }
 }

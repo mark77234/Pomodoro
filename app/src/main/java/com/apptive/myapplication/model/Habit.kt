@@ -1,3 +1,16 @@
 package com.apptive.myapplication.model
+import java.time.LocalDate
+data class Habit(
+    val id: Int,
+    val name: String,
+    val completionDates: List<LocalDate> = emptyList()
+) {
+    //HomeScreen의 text 속성을 name을 통해 접근
+    val text: String
+        get() = name
 
-data class Habit(val text: String, var isDone: Boolean = false)
+    //isDone 대신 isCompletedOn
+    fun isCompletedOn(date: LocalDate): Boolean {
+        return completionDates.contains(date)
+    }
+}

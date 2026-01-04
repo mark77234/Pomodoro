@@ -22,10 +22,15 @@ class MainViewModel : ViewModel() {
 
     fun toggleHabit(habit: Habit) {
         val today = LocalDate.now()
-        if (habit.isCompletedOn(today)) {
-            habit.completionDates.remove(today)
+        val updatedDates = if (habit.isCompletedOn(today)) {
+            habit.completionDates - today
         } else {
-            habit.completionDates.add(today)
+            habit.completionDates + today
+        }
+
+        val habitIndex = habits.indexOfFirst { it.id == habit.id }
+        if (habitIndex != -1) {
+            habits[habitIndex] = habit.copy(completionDates = updatedDates)
         }
     }
 }
