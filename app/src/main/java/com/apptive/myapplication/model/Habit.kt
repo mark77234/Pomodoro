@@ -3,7 +3,7 @@ import java.time.LocalDate
 data class Habit(
     val id: Int,
     val name: String,
-    val completionDates: MutableList<LocalDate> = mutableListOf()
+    val completionDates: List<LocalDate> = emptyList()
 ) {
     //HomeScreen의 text 속성을 name을 통해 접근
     val text: String

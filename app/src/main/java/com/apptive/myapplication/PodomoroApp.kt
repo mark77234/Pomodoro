@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.apptive.myapplication.navigation.PodomoroDestination
 import com.apptive.myapplication.navigation.PodomoroNavGraph
+import com.apptive.myapplication.viewmodel.MainViewModel
 
 private data class BottomNavItem(
     val destination: PodomoroDestination,
@@ -37,6 +39,7 @@ private val bottomNavItems = listOf(
 @androidx.compose.runtime.Composable
 fun PodomoroApp() {
     val navController = rememberNavController()
+    val mainViewModel: MainViewModel = viewModel()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
@@ -104,6 +107,7 @@ fun PodomoroApp() {
     ) { innerPadding ->
         PodomoroNavGraph(
             navController = navController,
+            mainViewModel = mainViewModel,
             modifier = Modifier.padding(innerPadding)
         )
     }
