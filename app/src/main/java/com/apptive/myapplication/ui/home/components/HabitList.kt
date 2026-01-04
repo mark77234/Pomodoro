@@ -25,12 +25,15 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.myapplication.model.Habit
+import java.time.LocalDate
 
 @Composable
 fun HabitList(
     habit: Habit, // String 대신 Habit 객체를 받음
     onHabitClick: () -> Unit // 클릭 이벤트를 상위로 전달
 ) { // 하나의 습관 항목을 화면에 어떻게 나타낼지 정의
+    val isCompleted = habit.isCompletedOn(LocalDate.now())
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,9 +49,9 @@ fun HabitList(
             .padding(horizontal = 12.dp, vertical = 8.dp), // 테두리 안 여백 정의 : 좌우 12.dp, 위아래: 8.dp
         verticalAlignment = Alignment.CenterVertically // contents를 수직 방향으로 가운데 정렬
     ) {
-        // isDone 상태에 따라 아이콘과 색상을 변경
-        val icon = if (habit.isDone) Icons.Filled.CheckCircle else Icons.Default.RadioButtonUnchecked
-        val iconColor = if (habit.isDone) Color.Red else Color.LightGray
+        // isCompleted 상태에 따라 아이콘과 색상을 변경
+        val icon = if (isCompleted) Icons.Filled.CheckCircle else Icons.Default.RadioButtonUnchecked
+        val iconColor = if (isCompleted) Color.Red else Color.LightGray
         Icon(
             imageVector = icon,
             contentDescription = "Habit status",
@@ -59,14 +62,14 @@ fun HabitList(
 
         //isDone 상태에 따라 텍스트 색상과 배경색을 변경
 
-        val textBackground = if (habit.isDone) Color(0x20B31B1B) else Color.Transparent
+        val textBackground = if (isCompleted) Color(0x20B31B1B) else Color.Transparent
         // default : 색 채우기 투명 -> isDone: 색 채우기 핑크
         Text(
             text = habit.text,
             modifier = Modifier.background(textBackground, shape = RoundedCornerShape(6.dp)),
             // isDone 상태에 따라 색 채우기 변경
             fontSize = 12.sp,
-            color = if (habit.isDone) Color.Gray else Color.Black
+            color = if (isCompleted) Color.Gray else Color.Black
             // default : 글자색 검은색 -> isDone: 글자색 검정
         )
     }
